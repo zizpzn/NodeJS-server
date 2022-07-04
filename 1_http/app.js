@@ -1,4 +1,5 @@
 const http = require("http");
+const fs = require("fs");
 
 console.log(http.STATUS_CODES);
 console.log(http.METHODS);
@@ -12,25 +13,14 @@ const server = http.createServer((req, res) => {
 
   const url = req.url;
   if (url === "/") {
-    res.setHeader("Content-type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Academy</title></head>");
-    res.write("<body><h1>Welcome!</h1></body>");
-    res.write("</html>");
+    fs.createReadStream("./html/index.html").pipe(res);
   } else if (url === "/courses") {
-    res.setHeader("Content-type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Crouses</title></head>");
-    res.write("<body><h1>Crouses!</h1></body>");
-    res.write("</html>");
+    fs.createReadStream("./html/courses.html").pipe(res);
   } else {
-    res.setHeader("Content-type", "text/html");
-    res.write("<html>");
-    res.write("<head><title>Academy</title></head>");
-    res.write("<body><h1>Not Found!</h1></body>");
-    res.write("</html>");
+    fs.createReadStream("./html/not-found.html").pipe(res);
   }
-  res.end();
 });
 
-server.listen(8080);
+server.listen(8080, () => {
+  console.log("Server running on http://localhost:8000");
+});
