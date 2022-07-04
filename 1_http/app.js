@@ -12,11 +12,23 @@ const server = http.createServer((req, res) => {
 
   const url = req.url;
   if (url === "/") {
-    res.write("Welcome!");
+    res.setHeader("Content-type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>Academy</title></head>");
+    res.write("<body><h1>Welcome!</h1></body>");
+    res.write("</html>");
   } else if (url === "/courses") {
-    res.write("Courses");
+    res.setHeader("Content-type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>Crouses</title></head>");
+    res.write("<body><h1>Crouses!</h1></body>");
+    res.write("</html>");
   } else {
-    res.write("Not Found");
+    res.setHeader("Content-type", "text/html");
+    res.write("<html>");
+    res.write("<head><title>Academy</title></head>");
+    res.write("<body><h1>Not Found!</h1></body>");
+    res.write("</html>");
   }
   res.end();
 });
